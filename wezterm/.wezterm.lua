@@ -17,7 +17,7 @@ config.window_decorations = "TITLE | RESIZE"
 -- config.color_scheme = "Poimandres"
 config.color_scheme = "Tokyo Night"
 
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.95
 config.macos_window_background_blur = 10
 
 -- and finally, return the configuration to wezterm
