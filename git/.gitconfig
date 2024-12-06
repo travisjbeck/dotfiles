@@ -1,0 +1,20 @@
+[color]
+	ui = auto
+[user]
+	name = Travis Beck
+	email = travis@travisjbeck.com
+[core]
+	excludesfile = /Users/Travis/.gitignore
+	quotepath = false
+[mergetool]
+	keepBackup = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
