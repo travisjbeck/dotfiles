@@ -1,0 +1,9 @@
+# First, include everything
+!*
+!*/
+!.*
+
+# Common paths to ignore
+.git/
+.DS_Store
+*.swp
