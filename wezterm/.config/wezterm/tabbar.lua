@@ -8,7 +8,7 @@ local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 local RIGHT_ARROW = wezterm.nerdfonts.pl_left_soft_divider
 
 -- Tab title function
-function tab_title(tab_info)
+local function tab_title(tab_info)
 	local title = tab_info.tab_title
 	if title and #title > 0 then
 		return title
@@ -30,7 +30,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
 	local edge_foreground = background
 	local title = tab_title(tab)
-
 	-- Add padding to the title
 	title = " " .. wezterm.truncate_right(title, max_width - 4) .. " "
 
@@ -120,7 +119,7 @@ local config = {
 	enable_tab_bar = true,
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = false,
-	tab_max_width = 44,
+	tab_max_width = 200,
 	colors = {
 		tab_bar = {
 			background = scheme.background,

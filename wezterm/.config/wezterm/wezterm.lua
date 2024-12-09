@@ -1,5 +1,8 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local merge = require("merge")
+local resurrect = require("resurrect/config")
+
 require("on")
 require("tabbar")
 
@@ -11,8 +14,7 @@ local scheme = wezterm.get_builtin_color_schemes()[schemeName]
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 local act = wezterm.action
--- This is where you actually apply your config choices
-
+local mux = wezterm.mux
 -- change leader key
 
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -31,9 +33,26 @@ config.inactive_pane_hsb = {
 	saturation = 0.24,
 	brightness = 0.5,
 }
+
+config.mouse_bindings = {
+	-- Open URLs with Ctrl+Click
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CMD",
+		action = act.OpenLinkAtMouseCursor,
+	},
+}
+
 config.default_cwd = "~/Developer"
 config.window_decorations = "RESIZE"
 config.color_scheme = schemeName
+
+--sessions and workspaces
+config.unix_domains = {
+	{
+		name = "unix",
+	},
+}
 
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 10
@@ -52,7 +71,16 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action.DisableDefaultAssignment,
 	},
-
+	-- Allow CMD-a to work
+	{
+		key = "a",
+		mods = "CMD",
+		action = wezterm.action.SendKey({
+			key = "a",
+			mods = "CMD",
+		}),
+	},
+	-- create new named workspace
 	{
 		key = "w",
 		mods = "LEADER",
@@ -77,13 +105,65 @@ config.keys = {
 			end),
 		}),
 	},
+	--set current tab name
+	{
+		key = "t",
+		mods = "LEADER",
+		action = act.PromptInputLine({
+			description = "Enter tab name",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
+	-- Attach to muxer
+	{
+		key = "a",
+		mods = "LEADER",
+		action = act.AttachDomain("unix"),
+	},
+
+	-- Detach from muxer
+	{
+		key = "d",
+		mods = "LEADER",
+		action = act.DetachDomain({ DomainName = "unix" }),
+	},
+
+	-- Rename current session; analagous to command in tmux
+	{
+		key = "$",
+		mods = "LEADER|SHIFT",
+		action = act.PromptInputLine({
+			description = "Enter new name for session",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					mux.rename_workspace(window:mux_window():get_workspace(), line)
+				end
+			end),
+		}),
+	},
+	-- Show list of workspaces
+	{
+		key = "s",
+		mods = "LEADER",
+		action = act.ShowLauncherArgs({ flags = "WORKSPACES" }),
+	},
 }
 
+--allow cmd keys to get through to nvim
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
 -- tab bar configuration
 config.show_new_tab_button_in_tab_bar = false
 
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = false
+
 -- and finally, return the configuration to wezterm
+
+config.keys = merge.all(config.keys, resurrect.keys)
 return config
