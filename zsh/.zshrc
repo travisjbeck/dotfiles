@@ -2,6 +2,10 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 
+# Prevent Ctrl+D from closing terminal
+setopt IGNOREEOF
+
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
@@ -16,8 +20,11 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# prevent CTRL Z from zapping my window
+bindkey '^Z' clear-screen  # This rebinds Ctrl+Z to just clear the screen
+
+
 # Load FZF 
-# Set up fzf key bindings and fuzzy completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #Preferred editor for local and remote sessions
@@ -68,10 +75,27 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 
 
-# Prevent Ctrl+D from closing terminal
-setopt IGNOREEOF
 
 # Custom FZF keybindings
 bindkey '^D' fzf-cd-widget      # Ctrl+D for directory search
 bindkey '^F' fzf-file-widget    # Ctrl+F for file search
-FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})'" #activate nvim on the current line selected
+# activate nvim on the current line selected with Ctrl V for vim
+FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})'"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

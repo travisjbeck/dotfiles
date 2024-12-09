@@ -20,4 +20,4 @@ vim.undofile = true
 -- Set minimum number of lines to keep above and below the cursor
 vim.opt.scrolloff = 16
 
-vim.opt.colorcolumn = "120"
+-- vim.opt.colorcolumn = "120"
