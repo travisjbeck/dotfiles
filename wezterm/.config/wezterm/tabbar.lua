@@ -26,6 +26,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		background = scheme.brights[1]
 		foreground = scheme.brights[7]
 	end
+	wezterm.log_info("Max_width: " .. max_width)
+	wezterm.log_info("Config Max_width: " .. config.tab_max_width)
 
 	local edge_foreground = background
 	local title = tab_title(tab)
@@ -156,19 +158,3 @@ wezterm.on("update-right-status", function(window, pane)
 
 	window:set_right_status(wezterm.format(elements))
 end)
-
--- Tab bar configuration
-local config = {
-	show_new_tab_button_in_tab_bar = false,
-	enable_tab_bar = true,
-	use_fancy_tab_bar = false,
-	tab_bar_at_bottom = false,
-	tab_max_width = 30,
-	colors = {
-		tab_bar = {
-			background = scheme.background,
-		},
-	},
-}
-
-return config

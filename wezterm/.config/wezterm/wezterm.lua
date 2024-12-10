@@ -163,6 +163,7 @@ config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = false
 
+config.tab_max_width = 630
 -- and finally, return the configuration to wezterm
 
 config.keys = merge.all(config.keys, resurrect.keys)
