@@ -14,4 +14,4 @@ vim.undofile = true
 -- vim.opt.incsearch = true
 
 -- vim.opt.colorcolumn = "120"
-vim.opt.title = true -- Allows neovom to send the Terminal details of the current window, instead of just getting 'v'
+-- vim.opt.title = true -- Allows neovom to send the Terminal details of the current window, instead of just getting 'v'
