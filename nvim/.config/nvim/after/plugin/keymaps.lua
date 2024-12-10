@@ -19,9 +19,5 @@ vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+y')
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
--- For macOS, using Cmd+a to select all
-vim.keymap.set("n", "<D-a>", "gg<S-v>G", { desc = "Select all text" })
-vim.keymap.set("v", "<D-a>", "<Esc>gg<S-v>G", { desc = "Select all text" })
-vim.keymap.set("i", "<D-a>", "<Esc>gg<S-v>G", { desc = "Select all text" })
+-- Reveal current file in the finder
+vim.keymap.set("n", "<leader>rf", "<cmd>!open -R %<cr>", { desc = "Reveal in Finder" })
