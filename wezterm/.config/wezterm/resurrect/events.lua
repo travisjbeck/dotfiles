@@ -42,10 +42,10 @@ wezterm.on("resurrect.save_state.finished", function(session_path)
 		return
 	end
 	local path = session_path:match(".+/([^+]+)$")
-	if window then
-		window:toast_notification("Wezterm", "Saved workspace", nil, 4000)
-	end
 	local name = path:match("^(.+)%.json$")
+	if window then
+		window:toast_notification("Wezterm - Saved Workspace", name, nil, 4000)
+	end
 end)
 
 wezterm.on("resurrect.load_state.finished", function(name, type)

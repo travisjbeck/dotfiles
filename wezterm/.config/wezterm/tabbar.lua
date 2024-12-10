@@ -19,9 +19,8 @@ end
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	-- Use your Tokyo Night colors
 	local edge_background = scheme.background
-	local background = scheme.selected_bg
+	local background = scheme.background
 	local foreground = scheme.brights[1]
-
 	-- Adjust colors for active and hover states
 	if tab.is_active then
 		background = scheme.brights[1]
@@ -32,7 +31,10 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local title = tab_title(tab)
 	-- Add padding to the title
 	title = " " .. wezterm.truncate_right(title, max_width - 4) .. " "
-
+	-- Add tab index for non-active tabs
+	if not tab.is_active then
+		title = tab.tab_index + 1 .. ": " .. title
+	end
 	return {
 		{ Background = { Color = edge_foreground } },
 		{ Foreground = { Color = edge_background } },
@@ -71,55 +73,97 @@ wezterm.on("update-status", function(window, pane)
 		-- { Foreground = { Color = scheme.selected_bg } },
 		-- { Text = RIGHT_ARROW },
 	}))
-
-	local basename = function(s)
-		-- Nothing a little regex can't fix
-		return string.gsub(s, "(.*[/\\])(.*)", "%2")
-	end
-
-	-- Current working directory
-	local cwd = pane:get_current_working_dir()
-	if cwd then
-		if type(cwd) == "userdata" then
-			-- Wezterm introduced the URL object in 20240127-113634-bbcac864
-			cwd = basename(cwd.file_path)
-		else
-			-- 20230712-072601-f4abf8fd or earlier version
-			cwd = basename(cwd)
-		end
-	else
-		cwd = ""
-	end
-
-	-- Current command
-	local cmd = pane:get_foreground_process_name()
-	-- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l)
-	cmd = cmd and basename(cmd) or ""
-
-	-- Time
-	local time = wezterm.strftime("%l:%M %p")
-
-	-- Right status
-	window:set_right_status(wezterm.format({
-		-- Wezterm has a built-in nerd fonts
-		-- https://wezfurlong.org/wezterm/config/lua/wezterm/nerdfonts.html
-		{ Text = wezterm.nerdfonts.md_folder .. " " .. cwd },
-		{ Text = " | " },
-		{ Foreground = { Color = "#e0af68" } },
-		{ Text = wezterm.nerdfonts.fa_code .. " " .. cmd },
-		"ResetAttributes",
-		{ Text = " | " },
-		{ Text = wezterm.nerdfonts.md_clock .. " " .. time },
-		{ Text = "  " },
-	}))
 end)
+
+wezterm.on("update-right-status", function(window, pane)
+	-- Each element holds the text for a cell in a "powerline" style << fade
+	local cells = {}
+
+	-- Figure out the cwd and host of the current pane.
+	-- This will pick up the hostname for the remote host if your
+	-- shell is using OSC 7 on the remote host.
+	local cwd_uri = pane:get_current_working_dir()
+	if cwd_uri then
+		local cwd = ""
+		local hostname = ""
+
+		cwd = cwd_uri.file_path
+		hostname = cwd_uri.host or wezterm.hostname()
+		-- Remove the domain name portion of the hostname
+		local dot = hostname:find("[.]")
+		if dot then
+			hostname = hostname:sub(1, dot - 1)
+		end
+		if hostname == "" then
+			hostname = wezterm.hostname()
+		end
+
+		cwd = string.gsub(cwd, "^/Users/Travis/", "~/")
+
+		table.insert(cells, cwd)
+	end
+
+	-- I like my date/time in this style: "Wed Mar 3 08:14"
+	local date = wezterm.strftime("%a %b %-d %H:%M")
+	table.insert(cells, date)
+
+	-- An entry for each battery (typically 0 or 1 battery)
+	for _, b in ipairs(wezterm.battery_info()) do
+		table.insert(cells, string.format("%.0f%%", b.state_of_charge * 100))
+	end
+
+	local base = wezterm.color.parse(scheme.brights[1])
+	base = base:lighten(0.2)
+	local colors = {
+		base:darken(0.6), -- darkest (30% darker)
+		base:darken(0.4), -- 20% darker
+		base:darken(0.2), -- 10% darker
+		base, -- original color
+	}
+
+	-- Foreground color for the text across the fade
+	local text_fg = scheme.foreground
+
+	-- The elements to be formatted
+	local elements = {}
+	-- How many cells have been formatted
+	local num_cells = 0
+
+	-- Translate a cell into elements
+	local function push(text, is_last)
+		local cell_no = num_cells + 1
+
+		if cell_no == 1 then
+			table.insert(elements, { Background = { Color = scheme.background } })
+			table.insert(elements, { Foreground = { Color = colors[1] } })
+			table.insert(elements, { Text = SOLID_LEFT_ARROW })
+		end
+
+		table.insert(elements, { Foreground = { Color = text_fg } })
+		table.insert(elements, { Background = { Color = colors[cell_no] } })
+		table.insert(elements, { Text = " " .. text .. " " })
+		if not is_last then
+			table.insert(elements, { Foreground = { Color = colors[cell_no + 1] } })
+			table.insert(elements, { Text = SOLID_LEFT_ARROW })
+		end
+		num_cells = num_cells + 1
+	end
+
+	while #cells > 0 do
+		local cell = table.remove(cells, 1)
+		push(cell, #cells == 0)
+	end
+
+	window:set_right_status(wezterm.format(elements))
+end)
+
 -- Tab bar configuration
 local config = {
 	show_new_tab_button_in_tab_bar = false,
 	enable_tab_bar = true,
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = false,
-	tab_max_width = 200,
+	tab_max_width = 30,
 	colors = {
 		tab_bar = {
 			background = scheme.background,

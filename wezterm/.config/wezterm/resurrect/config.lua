@@ -36,7 +36,6 @@ config.keys = {
 		action = wezterm.action_callback(function(win, pane) -- luacheck: ignore 212
 			local state = resurrect.workspace_state.get_workspace_state()
 			resurrect.save_state(state)
-			wezterm.log_info("SAVED")
 			resurrect.window_state.save_window_action()
 		end),
 	},
