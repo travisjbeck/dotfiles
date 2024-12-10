@@ -26,8 +26,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		background = scheme.brights[1]
 		foreground = scheme.brights[7]
 	end
-	wezterm.log_info("Max_width: " .. max_width)
-	wezterm.log_info("Config Max_width: " .. config.tab_max_width)
 
 	local edge_foreground = background
 	local title = tab_title(tab)

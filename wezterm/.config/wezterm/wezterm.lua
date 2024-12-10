@@ -54,15 +54,17 @@ config.unix_domains = {
 	},
 }
 
-config.window_background_opacity = 0.95
+config.window_background_opacity = 1
 config.macos_window_background_blur = 10
 
 config.window_padding = {
-	left = 5,
-	right = 5,
-	top = 5,
-	bottom = 5,
+	left = 20,
+	right = 15,
+	top = 20,
+	bottom = 20,
 }
+
+config.line_height = 1.0
 
 config.keys = {
 	-- Disable Ctrl-D by making it do nothing
@@ -163,7 +165,7 @@ config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = false
 
-config.tab_max_width = 630
+config.tab_max_width = 40
 -- and finally, return the configuration to wezterm
 
 config.keys = merge.all(config.keys, resurrect.keys)
