@@ -3,7 +3,6 @@ local wezterm = require("wezterm")
 local merge = require("merge")
 local resurrect = require("resurrect/config")
 
-require("on")
 require("tabbar")
 
 -- config.color_scheme = "Tokyo Night Moon"
@@ -17,16 +16,16 @@ local act = wezterm.action
 local mux = wezterm.mux
 -- change leader key
 
-config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1500 }
 
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
-config.font_size = 16
+config.font_size = 17
 
 config.exit_behavior = "CloseOnCleanExit"
 config.window_close_confirmation = "AlwaysPrompt"
 
 config.scrollback_lines = 3000
-config.default_workspace = "main"
+config.default_workspace = "--"
 
 -- dim inactive pane
 config.inactive_pane_hsb = {
@@ -36,11 +35,7 @@ config.inactive_pane_hsb = {
 
 config.mouse_bindings = {
 	-- Open URLs with Ctrl+Click
-	{
-		event = { Up = { streak = 1, button = "Left" } },
-		mods = "CMD",
-		action = act.OpenLinkAtMouseCursor,
-	},
+	{ event = { Up = { streak = 1, button = "Left" } }, mods = "CTRL", action = act.OpenLinkAtMouseCursor },
 }
 
 config.default_cwd = "~/Developer"
@@ -63,7 +58,6 @@ config.window_padding = {
 	top = 20,
 	bottom = 20,
 }
-
 config.line_height = 1.0
 
 config.keys = {
@@ -134,19 +128,6 @@ config.keys = {
 		action = act.DetachDomain({ DomainName = "unix" }),
 	},
 
-	-- Rename current session; analagous to command in tmux
-	{
-		key = "$",
-		mods = "LEADER|SHIFT",
-		action = act.PromptInputLine({
-			description = "Enter new name for session",
-			action = wezterm.action_callback(function(window, pane, line)
-				if line then
-					mux.rename_workspace(window:mux_window():get_workspace(), line)
-				end
-			end),
-		}),
-	},
 	-- Show list of workspaces
 	{
 		key = "s",
@@ -166,7 +147,34 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = false
 
 config.tab_max_width = 40
--- and finally, return the configuration to wezterm
 
 config.keys = merge.all(config.keys, resurrect.keys)
+
+-- nvim zen mode integration to increase the font size
+-- https://github.com/folke/zen-mode.nvim?tab=readme-ov-file#-plugins
+
+-- 	local overrides = window:get_config_overrides() or {}
+-- 	wezterm.log_info("user var changed")
+-- 	if name == "ZEN_MODE" then
+-- 		local incremental = value:find("+")
+-- 		local number_value = tonumber(value)
+-- 		if incremental ~= nil then
+-- 			while number_value > 0 do
+-- 				window:perform_action(wezterm.action.IncreaseFontSize, pane)
+-- 				number_value = number_value - 1
+-- 			end
+-- 			overrides.enable_tab_bar = false
+-- 		elseif number_value < 0 then
+-- 			window:perform_action(wezterm.action.ResetFontSize, pane)
+-- 			overrides.font_size = nil
+-- 			overrides.enable_tab_bar = true
+-- 		else
+-- 			overrides.font_size = number_value
+-- 			overrides.enable_tab_bar = false
+-- 		end
+-- 	end
+-- 	window:set_config_overrides(overrides)
+-- end)
+
+-- and finally, return the configuration to wezterm
 return config

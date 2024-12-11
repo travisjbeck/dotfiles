@@ -21,3 +21,5 @@ vim.keymap.set("n", "<leader>Y", '"+y')
 
 -- Reveal current file in the finder
 vim.keymap.set("n", "<leader>rf", "<cmd>!open -R %<cr>", { desc = "Reveal in Finder" })
+
+-- Telescope Undo Tree

@@ -12,6 +12,7 @@
 local config = {}
 local wezterm = require("wezterm")
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+local act = wezterm.action
 
 -- resurrect.wezterm periodic save every 5 minutes
 resurrect.periodic_save({
@@ -84,6 +85,19 @@ config.keys = {
 				is_fuzzy = true,
 			})
 		end),
+	},
+	-- Rename current session; analagous to command in tmux
+	{
+		key = "$",
+		mods = "LEADER|SHIFT",
+		action = act.PromptInputLine({
+			description = "Enter new name for session",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					mux.rename_workspace(window:mux_window():get_workspace(), line)
+				end
+			end),
+		}),
 	},
 }
 

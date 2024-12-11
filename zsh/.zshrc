@@ -74,28 +74,16 @@ eval "$(zoxide init zsh)"
 
 alias cd="z"
 
-
+# hitting escape then c was causing some fzf widget to come up
+bindkey -r '^[c'
+bindkey -r '\ec'
 
 # Custom FZF keybindings
-bindkey '^D' fzf-cd-widget      # Ctrl+D for directory search
-bindkey '^F' fzf-file-widget    # Ctrl+F for file search
+# Custom FZF keybindings
+bindkey -M emacs '\C-d' fzf-cd-widget      # Ctrl+D for directory search
+bindkey -M emacs '\C-f' fzf-file-widget    # Ctrl+F for file search
+# bindkey '^D' fzf-cd-widget      # Ctrl+D for directory search
+# bindkey '^F' fzf-file-widget    # Ctrl+F for file search
 # activate nvim on the current line selected with Ctrl V for vim
 FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})'"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

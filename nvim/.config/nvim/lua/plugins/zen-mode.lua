@@ -49,7 +49,7 @@ return {
       -- - listen_on unix:/tmp/kitty
       kitty = {
         enabled = false,
-        font = "+4", -- font size increment
+        font = "+10", -- font size increment
       },
       -- this will change the font size on alacritty when in zen mode
       -- requires  Alacritty Version 0.10.0 or higher
@@ -63,7 +63,7 @@ return {
       wezterm = {
         enabled = false,
         -- can be either an absolute font size or the number of incremental steps
-        font = "+4", -- (10% increase per step)
+        font = "30",
       },
       -- this will change the scale factor in Neovide when in zen mode
       -- See alse also the Plugins/Wezterm section in this projects README
