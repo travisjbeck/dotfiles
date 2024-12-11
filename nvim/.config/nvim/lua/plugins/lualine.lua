@@ -21,6 +21,8 @@ return {
       MORE = "M",
     }
 
+    opts.options.globalstatus = false
+
     local wordCount = {}
     function wordCount.getWords()
       if vim.tbl_contains({ "md", "txt", "markdown" }, vim.bo.filetype) then
