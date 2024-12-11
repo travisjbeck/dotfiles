@@ -52,9 +52,9 @@ config.window_background_opacity = 1
 config.macos_window_background_blur = 10
 
 config.window_padding = {
-	left = 20,
-	right = 15,
-	top = 20,
+	left = 5,
+	right = 0,
+	top = 5,
 	bottom = 0,
 }
 -- config.line_height = 1.0
@@ -152,28 +152,29 @@ config.keys = merge.all(config.keys, resurrect.keys)
 -- nvim zen mode integration to increase the font size
 -- https://github.com/folke/zen-mode.nvim?tab=readme-ov-file#-plugins
 
--- 	local overrides = window:get_config_overrides() or {}
--- 	wezterm.log_info("user var changed")
--- 	if name == "ZEN_MODE" then
--- 		local incremental = value:find("+")
--- 		local number_value = tonumber(value)
--- 		if incremental ~= nil then
--- 			while number_value > 0 do
--- 				window:perform_action(wezterm.action.IncreaseFontSize, pane)
--- 				number_value = number_value - 1
--- 			end
--- 			overrides.enable_tab_bar = false
--- 		elseif number_value < 0 then
--- 			window:perform_action(wezterm.action.ResetFontSize, pane)
--- 			overrides.font_size = nil
--- 			overrides.enable_tab_bar = true
--- 		else
--- 			overrides.font_size = number_value
--- 			overrides.enable_tab_bar = false
--- 		end
--- 	end
--- 	window:set_config_overrides(overrides)
--- end)
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	wezterm.log_info("user var changed" .. name)
+	local overrides = window:get_config_overrides() or {}
+	if name == "ZEN_MODE" then
+		local incremental = value:find("+")
+		local number_value = tonumber(value)
+		if incremental ~= nil then
+			while number_value > 0 do
+				window:perform_action(wezterm.action.IncreaseFontSize, pane)
+				number_value = number_value - 1
+			end
+			overrides.enable_tab_bar = false
+		elseif number_value < 0 then
+			window:perform_action(wezterm.action.ResetFontSize, pane)
+			overrides.font_size = nil
+			overrides.enable_tab_bar = true
+		else
+			overrides.font_size = number_value
+			overrides.enable_tab_bar = false
+		end
+	end
+	window:set_config_overrides(overrides)
+end)
 
 -- and finally, return the configuration to wezterm
 return config
