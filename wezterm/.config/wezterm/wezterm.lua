@@ -13,9 +13,8 @@ local scheme = wezterm.get_builtin_color_schemes()[schemeName]
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 local act = wezterm.action
-local mux = wezterm.mux
--- change leader key
 
+-- change leader key
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1500 }
 
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
@@ -25,7 +24,7 @@ config.exit_behavior = "CloseOnCleanExit"
 config.window_close_confirmation = "AlwaysPrompt"
 
 config.scrollback_lines = 3000
-config.default_workspace = "--"
+config.default_workspace = "Travis"
 
 -- dim inactive pane
 config.inactive_pane_hsb = {
@@ -38,7 +37,7 @@ config.mouse_bindings = {
 	{ event = { Up = { streak = 1, button = "Left" } }, mods = "CTRL", action = act.OpenLinkAtMouseCursor },
 }
 
-config.default_cwd = "~/Developer"
+-- config.default_cwd = "~/Developer"
 config.window_decorations = "RESIZE"
 config.color_scheme = schemeName
 
