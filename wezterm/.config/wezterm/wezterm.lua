@@ -55,9 +55,9 @@ config.window_padding = {
 	left = 20,
 	right = 15,
 	top = 20,
-	bottom = 20,
+	bottom = 0,
 }
-config.line_height = 1.0
+-- config.line_height = 1.0
 
 config.keys = {
 	-- Disable Ctrl-D by making it do nothing
