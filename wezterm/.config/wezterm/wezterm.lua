@@ -15,8 +15,8 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 -- change leader key
-config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1500 }
-
+-- config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1500 }
+config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1500 } -- CTRL+b, also like tmux
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 17
 
