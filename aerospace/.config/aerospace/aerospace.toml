@@ -148,9 +148,8 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 alt-shift-semicolon = 'mode service'
 
 
-cmd-h = [] # Disable "hide application"
+cmd-h = []     # Disable "hide application"
 cmd-alt-h = [] # Disable "hide others"
-
 
 
 # 'service' binding mode declaration.
@@ -158,7 +157,10 @@ cmd-alt-h = [] # Disable "hide others"
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+f = [
+  'layout floating tiling',
+  'mode main',
+] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
 
@@ -209,7 +211,6 @@ if.app-id = 'com.apple.mail'
 run = ['move-node-to-workspace M']
 
 
-
 [[on-window-detected]]
 if.app-id = 'com.superultra.Homerow'
 run = ['layout floating']
@@ -218,8 +219,3 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.runningwithcrayons.Alfred-Preferences'
 run = ['layout floating']
-
-
-
-
-
