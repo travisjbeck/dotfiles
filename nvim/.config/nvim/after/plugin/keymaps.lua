@@ -22,4 +22,17 @@ vim.keymap.set("n", "<leader>Y", '"+y')
 -- Reveal current file in the finder
 vim.keymap.set("n", "<leader>rf", "<cmd>!open -R %<cr>", { desc = "Reveal in Finder" })
 
--- Telescope Undo Tree
+-- Close all buffers
+vim.keymap.set("n", "<leader>bx", ":bufdo bd<CR>", { desc = "Close all buffers" })
+
+-- Change working directory to root directory
+vim.keymap.set("n", "<leader>cwd", function()
+  local root = require("lazyvim.util").root()
+  vim.cmd("cd " .. root)
+  -- Notify WezTerm about the directory change
+  -- Emit the OSC 7 sequence to update WezTerm's working directory
+  local esc = string.char(27)
+  local osc_sequence = string.format("%s]7;file://%s%s", esc, vim.fn.hostname(), root)
+  io.write(osc_sequence .. esc .. "\\")
+  print("Changed directory to: " .. root)
+end, { desc = "Change directory to root" })

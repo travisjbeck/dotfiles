@@ -10,8 +10,7 @@ vim.opt.wrap = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.undofile = true
 
--- vim.opt.hlsearch = false
--- vim.opt.incsearch = true
+-- turn the bloody swapfiles off
+vim.opt.swapfile = false
 
 -- vim.opt.colorcolumn = "120"
--- vim.opt.title = true -- Allows neovom to send the Terminal details of the current window, instead of just getting 'v'
