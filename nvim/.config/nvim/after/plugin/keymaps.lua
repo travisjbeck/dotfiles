@@ -10,9 +10,13 @@ vim.keymap.set("i", "<C-j>", "<Esc>:m .+1<CR>==gi", { noremap = true })
 vim.keymap.set("i", "<C-k>", "<Esc>:m .-2<CR>==gi", { noremap = true })
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { noremap = true })
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { noremap = true })
+
+-- Add our new LSP keymaps
+vim.keymap.set("n", "gh", vim.lsp.buf.hover, { noremap = true, desc = "Hover" })
+vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { noremap = true, desc = "Signature Help" })
+
 -- split the current line at the cursor position
 vim.keymap.set("n", "K", "i<CR><Esc>", { noremap = true, silent = true, desc = "Break line" })
-vim.keymap.set("n", "gh", vim.lsp.buf.hover, { noremap = true })
 
 -- yank to global clipboard
 vim.keymap.set("n", "<leader>y", '"+y')
@@ -36,3 +40,7 @@ vim.keymap.set("n", "<leader>cwd", function()
   io.write(osc_sequence .. esc .. "\\")
   print("Changed directory to: " .. root)
 end, { desc = "Change directory to root" })
+
+-- LSP Keymaps
+vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+vim.keymap.set("n", "<C-S-k>", vim.lsp.buf.hover, { desc = "Hover Documentation" })

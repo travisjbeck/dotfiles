@@ -20,7 +20,10 @@ return {
       CONFIRM = "Y?",
       MORE = "M",
     }
-
+    opts.options.disabled_filetypes = {
+      statusline = { "neo-tree", "Neotree" }, -- try both variations
+      winbar = { "neo-tree", "Neotree" },
+    }
     opts.options.globalstatus = false
 
     local wordCount = {}

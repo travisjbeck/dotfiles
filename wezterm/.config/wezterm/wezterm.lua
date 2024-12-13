@@ -1,20 +1,9 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 local mux = wezterm.mux
-
+local act = wezterm.action
 require("tabbar")
 
-local function mergeTables(t1, t2)
-	for key, value in pairs(t2) do
-		t1[key] = value
-	end
-end
-
-local function basename(s)
-	return string.gsub(s, "(.*[/\\])(.*)", "%2")
-end
-
--- config.color_scheme = "Tokyo Night Moon"
 local schemeName = "Tokyo Night"
 local scheme = wezterm.get_builtin_color_schemes()[schemeName]
 
@@ -69,6 +58,7 @@ config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1500 } -- CTR
 config.keys = require("keybinds")
 config.mouse_bindings = require("mousebinds")
 
+--ressurect settings
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 resurrect.periodic_save()
 resurrect.set_encryption({
@@ -82,10 +72,13 @@ local resurrect_event_listeners = {
 	"resurrect.error",
 	"resurrect.save_state.finished",
 }
+
 local is_periodic_save = false
+
 wezterm.on("resurrect.periodic_save", function()
 	is_periodic_save = true
 end)
+
 for _, event in ipairs(resurrect_event_listeners) do
 	wezterm.on(event, function(...)
 		if event == "resurrect.save_state.finished" and is_periodic_save then
@@ -102,11 +95,6 @@ for _, event in ipairs(resurrect_event_listeners) do
 		wezterm.gui.gui_windows()[1]:toast_notification("Wezterm - resurrect", msg, nil, 4000)
 	end)
 end
-
-wezterm.on("gui-startup", function(cmd)
-	local _, _, window = mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
-end)
 
 -- nvim zen mode integration to increase the font size
 -- https://github.com/folke/zen-mode.nvim?tab=readme-ov-file#-plugins

@@ -14,3 +14,7 @@ vim.undofile = true
 vim.opt.swapfile = false
 
 -- vim.opt.colorcolumn = "120"
+
+-- Set your search preferences
+vim.opt.ignorecase = true -- ignore case in searches by default
+vim.opt.smartcase = true -- but make it case sensitive if you type uppercase
