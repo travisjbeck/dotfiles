@@ -21,7 +21,7 @@ return {
       MORE = "M",
     }
     opts.options.disabled_filetypes = {
-      statusline = { "neo-tree", "Neotree" }, -- try both variations
+      statusline = { "neo-tree", "Neotree" },
       winbar = { "neo-tree", "Neotree" },
     }
     opts.options.globalstatus = false
@@ -43,7 +43,7 @@ return {
     end
 
     local function place()
-      return "C:%c L:%l/%L"
+      return string.format("%03d/%03d", vim.fn.line("."), vim.fn.line("$"))
     end
 
     local function diff_source()
@@ -117,7 +117,12 @@ return {
         },
       },
       lualine_x = {
-        { "fileformat", icons_enabled = true, symbols = { unix = "LF", dos = "CRLF", mac = "CR" } },
+        {
+          "filetype",
+          icons = true,
+          icon_only = true, -- Show only icon, not the name
+          colored = true, -- Colored icon
+        },
       },
       lualine_y = { nil },
       lualine_z = { { place, padding = { left = 1, right = 1 } } },
