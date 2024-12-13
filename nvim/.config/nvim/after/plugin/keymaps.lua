@@ -14,6 +14,7 @@ vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { noremap = true })
 -- Add our new LSP keymaps
 vim.keymap.set("n", "gh", vim.lsp.buf.hover, { noremap = true, desc = "Hover" })
 vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { noremap = true, desc = "Signature Help" })
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
 
 -- split the current line at the cursor position
 vim.keymap.set("n", "K", "i<CR><Esc>", { noremap = true, silent = true, desc = "Break line" })
