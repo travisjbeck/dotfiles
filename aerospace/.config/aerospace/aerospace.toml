@@ -9,8 +9,9 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
-
+after-startup-command = [
+  'exec-and-forget borders active_color=0xff000000 inactive_color=0xff343B58 width=5.0',
+]
 # Start AeroSpace at login
 start-at-login = true
 
@@ -21,7 +22,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 0
+accordion-padding = 40
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -37,7 +38,7 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-# on-focus-changed = "move-mouse window-lazy-center"
+#on-focus-changed = "move-mouse window-lazy-center"
 
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
@@ -50,6 +51,13 @@ automatically-unhide-macos-hidden-apps = true
 [key-mapping]
 preset = 'qwerty'
 
+# add colemak dh directional bindings 
+[key-mapping.key-notation-to-key-code]
+h = 'm'
+j = 'n'
+k = 'e'
+l = 'i'
+
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
 # - Constant:     gaps.outer.top = 8
@@ -60,8 +68,8 @@ preset = 'qwerty'
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
-outer.left = 10
 outer.bottom = 10
+outer.left = 10
 outer.top = 10
 outer.right = 10
 
@@ -105,6 +113,15 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
 
 alt-f = 'layout floating'
 alt-t = 'layout tiling'
@@ -116,28 +133,19 @@ alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-shift-minus = 'resize smart -50'
-alt-shift-equal = 'resize smart +50'
+alt-shift-keypadMinus = 'resize smart -100'
+alt-shift-keypadPlus = 'resize smart +100'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace M'
-alt-m = 'workspace M'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace M'
-alt-shift-m = 'move-node-to-workspace M'
+alt-shift-4 = 'move-node-to-workspace 4'
 alt-shift-5 = 'move-node-to-workspace 5'
 alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -162,16 +170,10 @@ f = [
   'mode main',
 ] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
-
-
 alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
-
-down = 'volume down'
-up = 'volume up'
-shift-down = ['volume set 0', 'mode main']
 
 
 [workspace-to-monitor-force-assignment]
@@ -184,7 +186,7 @@ run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
-run = ['move-node-to-workspace M']
+run = ['move-node-to-workspace 4']
 
 
 [[on-window-detected]]
@@ -203,12 +205,16 @@ run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace M']
+run = ['move-node-to-workspace 4']
 
 
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
-run = ['move-node-to-workspace M']
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = ['move-node-to-workspace 4']
 
 
 [[on-window-detected]]
@@ -218,4 +224,8 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.runningwithcrayons.Alfred-Preferences'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
 run = ['layout floating']

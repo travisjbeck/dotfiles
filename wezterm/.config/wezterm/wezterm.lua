@@ -3,6 +3,7 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local act = wezterm.action
 require("tabbar")
+require("cheatsheet")
 
 local schemeName = "Tokyo Night"
 local scheme = wezterm.get_builtin_color_schemes()[schemeName]

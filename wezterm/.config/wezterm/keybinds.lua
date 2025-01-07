@@ -96,6 +96,11 @@ local keys = {
 			resurrect.window_state.save_window_action()
 		end),
 	},
+	{
+		key = "x",
+		mods = "LEADER",
+		action = wezterm.action.ActivateCopyMode,
+	},
 }
 
 return keys

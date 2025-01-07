@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+#setup wezterm shell integration
+#https://wezfurlong.org/wezterm/shell-integration.html
+source ~/.wezterm.sh
 
 # Prevent Ctrl+D from closing terminal
 setopt IGNOREEOF
