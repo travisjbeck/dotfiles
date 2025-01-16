@@ -18,3 +18,6 @@ vim.opt.swapfile = false
 -- Set your search preferences
 vim.opt.ignorecase = true -- ignore case in searches by default
 vim.opt.smartcase = true -- but make it case sensitive if you type uppercase
+
+-- turn off whitespace indicators
+vim.opt.list = false
