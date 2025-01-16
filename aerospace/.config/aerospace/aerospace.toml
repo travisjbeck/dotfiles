@@ -68,10 +68,11 @@ l = 'i'
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
-outer.bottom = 10
-outer.left = 10
-outer.top = 10
-outer.right = 10
+
+outer.bottom = [{ monitor.main = 10 }, { monitor.builtin = 0 }, 0]
+outer.left = [{ monitor.main = 10 }, { monitor.builtin = 0 }, 0]
+outer.top = [{ monitor.main = 10 }, { monitor.builtin = 0 }, 0]
+outer.right = [{ monitor.main = 10 }, { monitor.builtin = 0 }, 0]
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -133,8 +134,8 @@ alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-shift-keypadMinus = 'resize smart -100'
-alt-shift-keypadPlus = 'resize smart +100'
+alt-shift-minus = 'resize smart -100'
+alt-shift-equal = 'resize smart +100'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -153,7 +154,7 @@ alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-alt-shift-semicolon = 'mode service'
+alt-shift-o = 'mode service'
 
 
 cmd-h = []     # Disable "hide application"
@@ -183,6 +184,11 @@ alt-shift-l = ['join-with right', 'mode main']
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
 run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = ["layout floating", "layout tiling", "move-node-to-workspace 1"]
+
 
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
