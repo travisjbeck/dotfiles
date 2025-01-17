@@ -77,6 +77,9 @@ eval "$(zoxide init zsh)"
 
 alias cd="z"
 
+# --- NeoVim shortcut ---
+alias v="nvim"
+
 # hitting escape then c was causing some fzf widget to come up
 bindkey -r '^[c'
 bindkey -r '\ec'
