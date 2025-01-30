@@ -99,3 +99,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Add composer global bin to PATH
 export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/Travis/.lmstudio/bin"

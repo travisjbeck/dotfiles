@@ -5,6 +5,9 @@ local act = wezterm.action
 require("tabbar")
 require("cheatsheet")
 
+-- keep plugins updated
+wezterm.plugin.update_all()
+
 local schemeName = "Tokyo Night"
 local scheme = wezterm.get_builtin_color_schemes()[schemeName]
 

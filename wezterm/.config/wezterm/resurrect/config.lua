@@ -8,6 +8,7 @@
 --
 -- The main wezterm configuration is then responsible for merging the
 -- keybindings with other keybindings, or setting up its own.
+-- plugins are stored at ~/Users/Travis/Library/Application Support/wezterm/plugins/httpssCssZssZsgithubsDscomsZsMLFlexersZsresurrectsDswezterm" }
 
 local config = {}
 local wezterm = require("wezterm")
@@ -50,11 +51,20 @@ config.keys = {
 				id = string.match(id, "([^/]+)$") -- match after '/'
 				id = string.match(id, "(.+)%..+$") -- remove file extension
 
+				-- local opts = {
+				-- 	window = win:mux_window(),
+				-- 	relative = true,
+				-- 	restore_text = true,
+				-- 	on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+				-- }
+
+				-- From https://github.com/MLFlexer/resurrect.wezterm/issues/70#issuecomment-2618667719
 				local opts = {
-					window = win:mux_window(),
+					close_open_tabs = true, -- **THIS IS THE NEW OPTION**
+					window = pane:window(), -- **THIS IS ALSO NEEDED**
+					on_pane_restore = resurrect.tab_state.default_on_pane_restore,
 					relative = true,
 					restore_text = true,
-					on_pane_restore = resurrect.tab_state.default_on_pane_restore,
 				}
 
 				if type == "workspace" then
