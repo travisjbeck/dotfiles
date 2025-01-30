@@ -14,6 +14,7 @@ local config = {}
 local wezterm = require("wezterm")
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 local act = wezterm.action
+local mux = wezterm.mux
 
 -- resurrect.wezterm periodic save every 5 minutes
 resurrect.periodic_save({
@@ -22,6 +23,35 @@ resurrect.periodic_save({
 	save_windows = true,
 	save_workspaces = true,
 })
+
+resurrect.set_encryption({
+	enable = true,
+	method = "/opt/homebrew/bin/age",
+	private_key = wezterm.home_dir .. "/.age/resurrect.txt",
+	public_key = "age1749r4a5hq6wepxrpqqpfh385swyf9u7rmakawlp5mmulzw979ams23uqlw",
+})
+
+local resurrect_event_listeners = {
+	"resurrect.error",
+	"resurrect.save_state.finished",
+}
+
+local is_periodic_save = false
+
+wezterm.on("resurrect.periodic_save", function()
+	is_periodic_save = true
+end)
+
+for _, event in ipairs(resurrect_event_listeners) do
+	wezterm.on(event, function(...)
+		if event == "resurrect.save_state.finished" and is_periodic_save then
+			is_periodic_save = false
+			return
+		end
+		local msg = event
+		wezterm.gui.gui_windows()[1]:toast_notification("Wezterm - resurrect", msg, nil, 4000)
+	end)
+end
 
 -- Save only 5000 lines per pane
 resurrect.set_max_nlines(5000)
@@ -111,5 +141,4 @@ config.keys = {
 	},
 }
 
-require("resurrect/events")
 return config

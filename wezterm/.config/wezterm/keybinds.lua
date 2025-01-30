@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
--- local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm")
 
 local keys = {
 	-- open lazygit in a new tab
@@ -64,37 +63,6 @@ local keys = {
 		key = "s",
 		mods = "LEADER",
 		action = act.ShowLauncherArgs({ flags = "WORKSPACES" }),
-	},
-	-- fuzzy load saved sessions
-	{
-		key = "L",
-		mods = "LEADER|SHIFT",
-		action = wezterm.action.Multiple({
-			wezterm.action_callback(function(win, pane)
-				local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-				resurrect.fuzzy_load(win, pane, function(id, label)
-					id = string.match(id, "([^/]+)$")
-					id = string.match(id, "(.+)%..+$")
-					local state = resurrect.load_state(id, "workspace")
-					local workspace_state = resurrect.workspace_state
-					workspace_state.restore_workspace(state, {
-						window = win:mux_window(),
-						relative = true,
-						restore_text = true,
-						on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-					})
-				end)
-			end),
-		}),
-	},
-	{
-		key = "S",
-		mods = "LEADER|SHIFT",
-		action = wezterm.action_callback(function(win, pane)
-			local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-			resurrect.save_state(resurrect.workspace_state.get_workspace_state())
-			resurrect.window_state.save_window_action()
-		end),
 	},
 	{
 		key = "x",

@@ -1,15 +1,14 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
-local mux = wezterm.mux
-local act = wezterm.action
 require("tabbar")
 require("cheatsheet")
+local resurrect = require("resurrect/config")
+local merge = require("merge")
 
 -- keep plugins updated
 wezterm.plugin.update_all()
 
 local schemeName = "Tokyo Night"
-local scheme = wezterm.get_builtin_color_schemes()[schemeName]
 
 local config = {
 
@@ -59,46 +58,12 @@ local config = {
 }
 
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1500 } -- CTRL+b, also like tmux
+
 config.keys = require("keybinds")
+
+-- Import other keys from separate configs to keep the code organized
+config.keys = merge.all(config.keys, resurrect.keys)
 config.mouse_bindings = require("mousebinds")
-
---ressurect settings
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-resurrect.periodic_save()
-resurrect.set_encryption({
-	enable = true,
-	method = "/opt/homebrew/bin/age",
-	private_key = wezterm.home_dir .. "/.age/resurrect.txt",
-	public_key = "age1749r4a5hq6wepxrpqqpfh385swyf9u7rmakawlp5mmulzw979ams23uqlw",
-})
-
-local resurrect_event_listeners = {
-	"resurrect.error",
-	"resurrect.save_state.finished",
-}
-
-local is_periodic_save = false
-
-wezterm.on("resurrect.periodic_save", function()
-	is_periodic_save = true
-end)
-
-for _, event in ipairs(resurrect_event_listeners) do
-	wezterm.on(event, function(...)
-		if event == "resurrect.save_state.finished" and is_periodic_save then
-			is_periodic_save = false
-			return
-		end
-		local args = { ... }
-		local msg = event
-		-- this adds the save location to the notification. It's a bit much
-		-- for _, v in ipairs(args) do
-		-- 	wezterm.log_info(v)
-		-- 	msg = msg .. " " .. tostring(v)
-		-- end
-		wezterm.gui.gui_windows()[1]:toast_notification("Wezterm - resurrect", msg, nil, 4000)
-	end)
-end
 
 -- nvim zen mode integration to increase the font size
 -- https://github.com/folke/zen-mode.nvim?tab=readme-ov-file#-plugins
