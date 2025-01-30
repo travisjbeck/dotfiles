@@ -8,7 +8,7 @@
 --
 -- The main wezterm configuration is then responsible for merging the
 -- keybindings with other keybindings, or setting up its own.
--- plugins are stored at ~/Users/Travis/Library/Application Support/wezterm/plugins/httpssCssZssZsgithubsDscomsZsMLFlexersZsresurrectsDswezterm" }
+-- plugins are stored at ~/Users/Travis/Library/Application Support/wezterm/plugins/
 
 local config = {}
 local wezterm = require("wezterm")
@@ -31,27 +31,9 @@ resurrect.set_encryption({
 	public_key = "age1749r4a5hq6wepxrpqqpfh385swyf9u7rmakawlp5mmulzw979ams23uqlw",
 })
 
-local resurrect_event_listeners = {
-	"resurrect.error",
-	"resurrect.save_state.finished",
-}
-
-local is_periodic_save = false
-
-wezterm.on("resurrect.periodic_save", function()
-	is_periodic_save = true
+wezterm.on("resurrect.save_state.finished", function()
+	wezterm.gui.gui_windows()[1]:toast_notification("Session Saved", "", nil, 4000)
 end)
-
-for _, event in ipairs(resurrect_event_listeners) do
-	wezterm.on(event, function(...)
-		if event == "resurrect.save_state.finished" and is_periodic_save then
-			is_periodic_save = false
-			return
-		end
-		local msg = event
-		wezterm.gui.gui_windows()[1]:toast_notification("Wezterm - resurrect", msg, nil, 4000)
-	end)
-end
 
 -- Save only 5000 lines per pane
 resurrect.set_max_nlines(5000)
