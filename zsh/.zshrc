@@ -16,9 +16,10 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  # zsh-syntax-highlighting
+  zsh-syntax-highlighting
+  zsh-autocomplete
   zsh-autosuggestions
-  fast-syntax-highlighting
+  # fast-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh

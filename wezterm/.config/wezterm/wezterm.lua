@@ -2,11 +2,13 @@
 local wezterm = require("wezterm")
 require("tabbar")
 require("cheatsheet")
-local resurrect = require("resurrect/config")
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+
+local resurrectConfig = require("resurrect/config")
 local merge = require("merge")
 
 -- keep plugins updated
-wezterm.plugin.update_all()
+-- wezterm.plugin.update_all()
 
 local schemeName = "Tokyo Night"
 
@@ -62,7 +64,7 @@ config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1500 } -- CTR
 config.keys = require("keybinds")
 
 -- Import other keys from separate configs to keep the code organized
-config.keys = merge.all(config.keys, resurrect.keys)
+config.keys = merge.all(config.keys, resurrectConfig.keys)
 config.mouse_bindings = require("mousebinds")
 
 -- nvim zen mode integration to increase the font size
@@ -91,5 +93,6 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 	window:set_config_overrides(overrides)
 end)
 
+wezterm.on("gui-startup", resurrect.state_manager.resurrect_on_gui_startup)
 -- and finally, return the configuration to wezterm
 return config

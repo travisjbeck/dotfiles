@@ -45,3 +45,23 @@ end, { desc = "Change directory to root" })
 -- LSP Keymaps
 vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 vim.keymap.set("n", "<C-S-k>", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+
+-- Alt backspace to delete the whole word like normally
+vim.keymap.set("i", "<M-BS>", "<C-w>", {})
+
+-- Keymaps for copying file paths
+vim.keymap.set("n", "<leader>cfp", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, { desc = "Copy full path to clipboard" })
+
+vim.keymap.set("n", "<leader>cfr", function()
+  vim.fn.setreg("+", vim.fn.expand("%"))
+end, { desc = "Copy relative path to clipboard" })
+
+vim.keymap.set("n", "<leader>cfn", function()
+  vim.fn.setreg("+", vim.fn.expand("%:t"))
+end, { desc = "Copy filename to clipboard" })
+
+vim.keymap.set("n", "<leader>sp", function()
+  print(vim.fn.expand("%:p"))
+end, { desc = "Show full path in command line" })

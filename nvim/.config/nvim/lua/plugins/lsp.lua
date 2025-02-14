@@ -32,6 +32,13 @@ return {
       return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", config)
     end
 
+    -- Add folding capabilities required by ufo.nvim
+    -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    -- capabilities.textDocument.foldingRange = {
+    --   dynamicRegistration = false,
+    --   lineFoldingOnly = true,
+    -- }
+
     -- Server configurations
     opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, {
       vtsls = {
@@ -70,6 +77,12 @@ return {
               django = true,
             },
           },
+        },
+      },
+      -- intelephense licenceKey
+      intelephense = {
+        init_options = {
+          licenceKey = vim.fn.readfile(vim.fn.expand("~/intelephense/license.txt"))[1],
         },
       },
     })
