@@ -88,6 +88,6 @@ return {
     on_close = function() end,
   },
   keys = {
-    { "<leader>z", "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" },
+    { "<leader>zz", "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" },
   },
 }

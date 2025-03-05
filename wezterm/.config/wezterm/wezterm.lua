@@ -2,7 +2,6 @@
 local wezterm = require("wezterm")
 require("tabbar")
 require("cheatsheet")
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 local resurrectConfig = require("resurrect/config")
 local merge = require("merge")
@@ -15,7 +14,7 @@ local schemeName = "Tokyo Night"
 local config = {
 
 	font = wezterm.font("MesloLGS Nerd Font Mono"),
-	font_size = 17,
+	font_size = 16,
 
 	exit_behavior = "CloseOnCleanExit",
 	window_close_confirmation = "AlwaysPrompt",
@@ -93,6 +92,5 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 	window:set_config_overrides(overrides)
 end)
 
-wezterm.on("gui-startup", resurrect.state_manager.resurrect_on_gui_startup)
 -- and finally, return the configuration to wezterm
 return config

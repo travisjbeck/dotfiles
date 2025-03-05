@@ -183,7 +183,6 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
-
 [workspace-to-monitor-force-assignment]
 1 = 'main'
 2 = 'secondary'
@@ -196,16 +195,13 @@ run = ['move-node-to-workspace 1']
 if.app-id = "com.mitchellh.ghostty"
 run = ["layout floating", "layout tiling", "move-node-to-workspace 1"]
 
-
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
 run = ['move-node-to-workspace 4']
 
-
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = ['layout floating']
-
 
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
@@ -215,11 +211,9 @@ run = ['move-node-to-workspace 3']
 if.app-id = 'com.openai.chat'
 run = ['move-node-to-workspace 3']
 
-
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace 4']
-
 
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
@@ -229,11 +223,9 @@ run = ['move-node-to-workspace 4']
 if.app-id = 'com.apple.iCal'
 run = ['move-node-to-workspace 4']
 
-
 [[on-window-detected]]
 if.app-id = 'com.superultra.Homerow'
 run = ['layout floating']
-
 
 [[on-window-detected]]
 if.app-id = 'com.runningwithcrayons.Alfred-Preferences'
@@ -242,3 +234,11 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.autodesk.fusion360'
+run = ['move-node-to-workspace 7']
+
+[[on-window-detected]]
+if.app-id = 'com.bambulab.bambu-studio'
+run = ['move-node-to-workspace 5']

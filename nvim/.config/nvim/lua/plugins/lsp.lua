@@ -85,6 +85,12 @@ return {
           licenceKey = vim.fn.readfile(vim.fn.expand("~/intelephense/license.txt"))[1],
         },
       },
+      -- turn off cssls formatting
+      cssls = {
+        init_options = {
+          provideFormatter = false,
+        },
+      },
     })
 
     return opts
