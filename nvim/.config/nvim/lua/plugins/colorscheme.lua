@@ -66,7 +66,7 @@ return {
           NeoTreeFloatNormal = { bg = dark_bg },
 
           -- Tabs
-          NeoTreeTabActive = { fg = palette.teal1, bg = palette.background1, bold = true },
+          NeoTreeTabActive = { fg = palette.muted, bg = palette.background1, bold = true },
           NeoTreeTabInactive = { fg = palette.blueGray3, bg = dark_bg },
           NeoTreeTabSeparatorActive = { fg = palette.teal1, bg = palette.background1 },
           NeoTreeTabSeparatorInactive = { fg = palette.background2, bg = dark_bg },
