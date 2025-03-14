@@ -24,6 +24,7 @@ return {
       html = { "prettier" },
       javascript = { "prettier" },
       javascriptreact = { "prettier" },
+      sql = {"sql_formatter"}
     },
   },
 }
