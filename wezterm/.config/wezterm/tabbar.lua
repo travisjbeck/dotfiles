@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local schemeName = "Poimandres"
+local schemeName = "Tokyo Night"
 local scheme = wezterm.get_builtin_color_schemes()[schemeName]
 
 -- Define the separator characters

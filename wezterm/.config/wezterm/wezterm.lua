@@ -9,7 +9,7 @@ local merge = require("merge")
 -- keep plugins updated
 -- wezterm.plugin.update_all()
 
-local schemeName = "Poimandres" -- "Tokyo Night"
+local schemeName = "Tokyo Night"
 
 local config = {
 
