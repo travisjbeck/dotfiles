@@ -1,0 +1,1 @@
+.config/aerospace/cycle-app-windows.sh
