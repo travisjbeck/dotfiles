@@ -107,10 +107,9 @@ wezterm.on("update-right-status", function(window, pane)
 	local date = wezterm.strftime("%a %b %-d ")
 	table.insert(cells, date)
 
-	-- An entry for each battery (typically 0 or 1 battery)
-	for _, b in ipairs(wezterm.battery_info()) do
-		table.insert(cells, string.format("%.0f%%", b.state_of_charge * 100))
-	end
+	-- Current time in 12-hour AM/PM format
+	local time = wezterm.strftime("%-I:%M %p")
+	table.insert(cells, time)
 
 	local base = wezterm.color.parse(scheme.brights[1])
 	base = base:lighten(0.2)
