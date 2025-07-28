@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WezTerm Quick Reference</title>
+    <style>
+        body {
+            font-family: 'Menlo', 'Monaco', monospace;
+            font-size: 9pt;
+            margin: 0;
+            padding: 10px;
+            line-height: 1.3;
+        }
+        h1 {
+            font-size: 12pt;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+        .cols {
+            display: flex;
+            gap: 20px;
+        }
+        .col {
+            flex: 1;
+        }
+        h2 {
+            font-size: 10pt;
+            margin: 8px 0 4px 0;
+            text-decoration: underline;
+        }
+        p {
+            margin: 2px 0;
+            font-size: 8pt;
+        }
+        code {
+            background: #eee;
+            padding: 1px 3px;
+            font-weight: bold;
+        }
+        .leader {
+            color: #666;
+            font-size: 7pt;
+        }
+        .info {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 9pt;
+        }
+        @media print {
+            body {
+                padding: 5px;
+            }
+            .cols {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>WezTerm Colemak-DH</h1>
+    <div class="info">Leader = <code>Ctrl+b</code> | Nav: <code>m</code>← <code>n</code>↓ <code>e</code>↑ <code>i</code>→</div>
+    
+    <div class="cols">
+        <div class="col">
+            <h2>Panes</h2>
+            <p><span class="leader">Leader</span> <code>|</code> Split horizontal</p>
+            <p><span class="leader">Leader</span> <code>-</code> Split vertical</p>
+            <p><span class="leader">Leader</span> <code>m/n/e/i</code> Navigate</p>
+            <p><span class="leader">Leader</span> <code>⇧m/⇧n/⇧e/⇧i</code> Resize</p>
+            <p><span class="leader">Leader</span> <code>z</code> Zoom toggle</p>
+            <p><span class="leader">Leader</span> <code>c</code> Close pane</p>
+            <p><span class="leader">Leader</span> <code>Space</code> Rotate</p>
+            <p><span class="leader">Leader</span> <code>0</code> Select mode</p>
+            <p><span class="leader">Leader</span> <code>q</code> Show IDs</p>
+        </div>
+        
+        <div class="col">
+            <h2>Workspace/Tab</h2>
+            <p><span class="leader">Leader</span> <code>t</code> Rename tab</p>
+            <p><span class="leader">Leader</span> <code>w</code> New workspace</p>
+            <p><span class="leader">Leader</span> <code>s</code> List workspaces</p>
+            
+            <h2>Session</h2>
+            <p><span class="leader">Leader</span> <code>⇧S</code> Save</p>
+            <p><span class="leader">Leader</span> <code>⇧L</code> Load</p>
+            <p><span class="leader">Leader</span> <code>⇧D</code> Delete</p>
+            <p><span class="leader">Leader</span> <code>⇧$</code> Rename</p>
+        </div>
+        
+        <div class="col">
+            <h2>Other</h2>
+            <p><span class="leader">Leader</span> <code>g</code> Lazygit</p>
+            <p><span class="leader">Leader</span> <code>x</code> Copy mode</p>
+            <p><span class="leader">Leader</span> <code>i</code> Cheatsheet</p>
+            
+            <p style="margin-top: 20px; font-size: 7pt; color: #666;">
+            ⇧ = Shift key
+            </p>
+        </div>
+    </div>
+</body>
+</html>

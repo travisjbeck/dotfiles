@@ -69,3 +69,6 @@ vim.keymap.set("n", "<leader>zcn", function()
   vim.fn.setreg("+", vim.fn.expand("%:t"))
 end, { desc = "Copy fileName to clipboard" })
 
+-- Claude Code Terminal toggle
+vim.keymap.set('n', '<leader>cc', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
+

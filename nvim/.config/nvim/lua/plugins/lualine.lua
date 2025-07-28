@@ -24,6 +24,7 @@ return {
       statusline = { "neo-tree", "Neotree" },
       winbar = { "neo-tree", "Neotree" },
     }
+    
     opts.options.globalstatus = false
 
     local wordCount = {}
@@ -64,7 +65,7 @@ return {
 
     opts.options.theme = "auto"
     opts.options.component_separators = { " ", " " }
-    opts.options.section_separators = { left = "", right = "" }
+    opts.options.section_separators = { left = "", right = "" }
 
     opts.sections = {
       lualine_a = {
@@ -73,10 +74,15 @@ return {
           fmt = function(s)
             return mode_map[s] or s
           end,
+          cond = function() return vim.bo.buftype ~= "terminal" end,
         },
       },
       lualine_b = {
-        { "branch", icon = "󰘬" },
+        { 
+          "branch", 
+          icon = "󰘬",
+          cond = function() return vim.bo.buftype ~= "terminal" end,
+        },
         {
           "diff",
           colored = true,
@@ -86,46 +92,76 @@ return {
             color_modified = "#ffdf1b",
             color_removed = "#ff6666",
           },
+          cond = function() return vim.bo.buftype ~= "terminal" end,
         },
       },
       lualine_c = {
-        { "diagnostics", sources = { "nvim_diagnostic" } },
-        function()
-          return "%="
-        end,
+        {
+          function() 
+            if vim.bo.buftype == "terminal" then
+              return "%=Claude Code%="
+            end
+          end,
+          color = { fg = "#ff6b35" },
+          cond = function() return vim.bo.buftype == "terminal" end,
+        },
+        {
+          "diagnostics", 
+          sources = { "nvim_diagnostic" },
+          cond = function() return vim.bo.buftype ~= "terminal" end,
+        },
+        {
+          function() return "%=" end,
+          cond = function() return vim.bo.buftype ~= "terminal" end,
+        },
         {
           "filename",
           file_status = true,
           path = 1,
           shorting_target = 40,
-          symbols = { modified = "󰐖", readonly = "", unnamed = "[No Name]", newfile = "[New]" },
+          symbols = { modified = "󰐖", readonly = "", unnamed = "[No Name]", newfile = "[New]" },
+          cond = function() return vim.bo.buftype ~= "terminal" end,
         },
         {
           wordCount.getWords,
           color = { fg = "#333333", bg = "#eeeeee" },
-          separator = { left = "", right = "" },
+          separator = { left = "", right = "" },
           cond = function()
-            return wordCount.getWords() ~= "Not a text file"
+            return wordCount.getWords() ~= "Not a text file" and vim.bo.buftype ~= "terminal"
           end,
         },
-        { "searchcount" },
-        { "selectioncount" },
+        { 
+          "searchcount",
+          cond = function() return vim.bo.buftype ~= "terminal" end,
+        },
+        { 
+          "selectioncount",
+          cond = function() return vim.bo.buftype ~= "terminal" end,
+        },
         {
           show_macro_recording,
           color = { fg = "#333333", bg = "#ff6666" },
-          separator = { left = "", right = "" },
+          separator = { left = "", right = "" },
+          cond = function() return vim.bo.buftype ~= "terminal" end,
         },
       },
       lualine_x = {
         {
           "filetype",
           icons = true,
-          icon_only = true, -- Show only icon, not the name
-          colored = true, -- Colored icon
+          icon_only = true,
+          colored = true,
+          cond = function() return vim.bo.buftype ~= "terminal" end,
         },
       },
       lualine_y = { nil },
-      lualine_z = { { place, padding = { left = 1, right = 1 } } },
+      lualine_z = {
+        {
+          place,
+          padding = { left = 1, right = 1 },
+          cond = function() return vim.bo.buftype ~= "terminal" end,
+        },
+      },
     }
 
     opts.inactive_sections = {
@@ -147,7 +183,7 @@ return {
           "filename",
           path = 1,
           shorting_target = 40,
-          symbols = { modified = "󰐖", readonly = "", unnamed = "[No Name]", newfile = "[New]" },
+          symbols = { modified = "󰐖", readonly = "", unnamed = "[No Name]", newfile = "[New]" },
         },
       },
       lualine_x = { { place, padding = { left = 1, right = 1 } } },
@@ -181,5 +217,6 @@ return {
         )
       end,
     })
+
   end,
 }

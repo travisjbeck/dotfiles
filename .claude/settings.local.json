@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "*",
+      "Bash(rm:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(echo $TERM)",
+      "Bash(stty:*)",
+      "WebFetch(domain:wezterm.org)",
+      "Bash(ls:*)",
+      "Bash(defaults read:*)",
+      "Bash(wezterm show-keys:*)"
+    ],
+    "deny": []
+  }
+}

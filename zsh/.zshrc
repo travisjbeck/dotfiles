@@ -18,14 +18,15 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autocomplete
-  zsh-autosuggestions
+  # zsh-autosuggestions
   # fast-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
 
+
 # prevent CTRL Z from zapping my window
-bindkey '^Z' clear-screen  # This rebinds Ctrl+Z to just clear the screen
+# bindkey '^Z' clear-screen  # This rebinds Ctrl+Z to just clear the screen
 
 
 # Load FZF 
@@ -38,15 +39,15 @@ else
   export EDITOR='nvim'
 fi
 
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
-ZSH_AUTOSUGGEST_STRATEGY=(history)
+# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
+# ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # Make Tab and ShiftTab cycle completions on the command line
 # bindkey              '^I'         menu-complete
 # bindkey "$terminfo[kcbt]" reverse-menu-complete
 # makes enter always submit the command line, even when you are in the menu
 bindkey -M menuselect '^M' .accept-line
-bindkey '^I' autosuggest-accept
+# bindkey '^I' autosuggest-accept
 
 
 #replace the travis@macbookpro part of the prompts
@@ -76,7 +77,7 @@ alias ls="eza --icons=always"
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 
-alias cd="z"
+# alias cd="z"
 
 # --- NeoVim shortcut ---
 alias v="nvim"
@@ -95,8 +96,7 @@ bindkey -M emacs '\C-f' fzf-file-widget    # Ctrl+F for file search
 FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})'"
 
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+
 
 # Add composer global bin to PATH
 export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -105,6 +105,21 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="$PATH:/Users/Travis/.lmstudio/bin"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/Travis/.docker/completions $fpath)
-autoload -Uz compinit
+autoload -Uz compini
 compinit
 # End of Docker CLI completions
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+
+# Created by `pipx` on 2025-06-24 02:39:42
+export PATH="$PATH:/Users/Travis/.local/bin"
+
+# Task Master aliases added on 6/30/2025
+alias tm='task-master'
+alias taskmaster='task-master'
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v22.17.1/bin:$PATH"

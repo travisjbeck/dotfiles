@@ -6,6 +6,10 @@
 [core]
 	excludesfile = /Users/Travis/.gitignore
 	quotepath = false
+	fsmonitor = true
+	untrackedcache = true
+	preloadindex = true
+	fscache = true
 [mergetool]
 	keepBackup = true
 [filter "media"]
@@ -18,3 +22,7 @@
 	required = true
 [init]
 	defaultBranch = main
+[feature]
+	manyFiles = true
+[index]
+	version = 4

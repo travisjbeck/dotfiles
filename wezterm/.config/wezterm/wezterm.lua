@@ -24,8 +24,8 @@ local config = {
 
 	-- dim inactive pane
 	inactive_pane_hsb = {
-		saturation = 0.24,
-		brightness = 0.5,
+		saturation = 0.7,
+		brightness = 0.7,
 	},
 
 	-- config.default_cwd = "~/Developer"
