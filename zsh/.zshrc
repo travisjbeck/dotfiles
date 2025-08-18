@@ -123,3 +123,4 @@ alias tm='task-master'
 alias taskmaster='task-master'
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.nvm/versions/node/v22.17.1/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

@@ -11,7 +11,9 @@
       "WebFetch(domain:wezterm.org)",
       "Bash(ls:*)",
       "Bash(defaults read:*)",
-      "Bash(wezterm show-keys:*)"
+      "Bash(wezterm show-keys:*)",
+      "WebFetch(domain:nikitabobko.github.io)",
+      "WebFetch(domain:gist.github.com)"
     ],
     "deny": []
   }
