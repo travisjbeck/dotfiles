@@ -1,0 +1,29 @@
+{
+  "theme": "tokyo-night",
+  "display": {
+    "style": "powerline",
+    "lines": [
+      {
+        "segments": {
+          "directory": { "enabled": true, "showBasename": true },
+          "git": {
+            "enabled": true,
+            "showSha": false,
+            "showWorkingTree": true,
+            "showOperation": false,
+            "showTag": false,
+            "showTimeSinceCommit": false,
+            "showStashCount": false,
+            "showUpstream": false,
+            "showRepoName": false
+          },
+          "model": { "enabled": true },
+          "context": { "enabled": true },
+          "session": { "enabled": false },
+          "today": { "enabled": false },
+          "block": { "enabled": true, "showMessageCount": true }
+        }
+      }
+    ]
+  }
+}

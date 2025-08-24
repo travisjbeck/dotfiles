@@ -1,0 +1,1 @@
+- never fucking reward hijack!  do the thing i ask you to do and never give up or go around it
