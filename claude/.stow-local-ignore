@@ -1,7 +1,16 @@
 # Ignore sensitive Claude files
-settings.local.json
-allowed_tools.txt
-*.log
-*.cache
-*.tmp
-.DS_Store
+settings\.local\.json
+allowed_tools\.txt
+\.log$
+\.cache$
+\.tmp$
+\.DS_Store
+cache
+ide
+plugins
+powerline
+projects
+shell-snapshots
+statsig
+todos
+config

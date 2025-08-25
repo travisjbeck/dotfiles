@@ -68,23 +68,16 @@
       "mcp__task-master-ai__use_tag",
       "mcp__task-master-ai__rename_tag",
       "mcp__task-master-ai__copy_tag",
-      "mcp__task-master-ai__research"
+      "mcp__task-master-ai__research",
+      "mcp__youtube-transcript__get_transcript"
     ],
     "deny": []
   },
-  "model": "sonnet",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "claude-powerline",
     "padding": 0
-  },
-  "mcpServers": {
-    "browsermcp": {
-      "command": "npx",
-      "args": [
-        "@browsermcp/mcp@latest"
-      ]
-    }
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754159652773
