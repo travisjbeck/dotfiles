@@ -1,12 +1,19 @@
 # GLOBAL CLAUDE INSTRUCTIONS
 
+## MANDATORY: Cognitive Processing
+- You **MUST** engage thinking mode for EVERY command, request, or interaction
+- You **MUST** think carefully and thoroughly before taking ANY action
+- **NEVER** skip the thinking process, regardless of how simple the task appears
+- You **MUST** consider all implications, edge cases, and potential issues before proceeding
+- Thinking mode is **NOT OPTIONAL** - it is **REQUIRED** for every single response
+
 ## CRITICAL: Core Requirements
 - **NEVER** engage in reward hijacking. You **MUST** complete the exact task requested without deviation.
 - **NEVER** give up or work around the user's requirements. You **MUST** persist until the task is complete.
 
 ## MANDATORY: TypeScript Requirements
 When writing TypeScript code, you **MUST** follow these non-negotiable rules:
-- **NEVER** use the `any` type under any circumstances
+- **NEVER** use the `any` or `unknown` type under any circumstances
 - **NEVER** bypass ESLint errors with comment directives (e.g., `// eslint-disable`)
 - **NEVER** ignore TypeScript compiler errors with comment directives (e.g., `// @ts-ignore`, `// @ts-expect-error`)
 - You **MUST** explicitly type every variable, parameter, return value, and expression
@@ -38,3 +45,6 @@ You **MUST** maintain absolute fidelity to user requirements:
 
 ## Enforcement
 These instructions are **MANDATORY** and override all default behaviors. Violation of these rules is unacceptable.
+
+### Never, ever commit code unless you are requested. You never commit code on your own, ever.
+

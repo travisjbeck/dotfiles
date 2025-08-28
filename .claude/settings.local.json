@@ -13,7 +13,15 @@
       "Bash(defaults read:*)",
       "Bash(wezterm show-keys:*)",
       "WebFetch(domain:nikitabobko.github.io)",
-      "WebFetch(domain:gist.github.com)"
+      "WebFetch(domain:gist.github.com)",
+      "WebSearch",
+      "WebFetch(domain:www.gnu.org)",
+      "Read(//Users/Travis/**)",
+      "mcp__youtube-transcript__get_transcript",
+      "Read(//opt/homebrew/var/log/sketchybar/**)",
+      "Read(//opt/homebrew/share/sketchybar/examples/**)",
+      "WebFetch(domain:felixkratz.github.io)",
+      "WebFetch(domain:wezfurlong.org)"
     ],
     "deny": []
   }

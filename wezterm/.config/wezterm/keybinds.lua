@@ -141,10 +141,16 @@ local keys = {
 			end),
 		}),
 	},
-	-- Show list of workspaces
+	-- Swap current pane with selected pane
 	{
 		key = "s",
 		mods = "LEADER",
+		action = act.PaneSelect({ mode = "SwapWithActive" }),
+	},
+	-- Show list of workspaces
+	{
+		key = "W",
+		mods = "LEADER|SHIFT",
 		action = act.ShowLauncherArgs({ flags = "WORKSPACES" }),
 	},
 	{
