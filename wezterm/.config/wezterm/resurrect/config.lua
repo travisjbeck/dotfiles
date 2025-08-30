@@ -43,6 +43,13 @@ config.keys = {
 		action = wezterm.action_callback(function(win, pane)
 			resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
 			resurrect.window_state.save_window_action()
+			-- Show notification that workspace was saved
+			wezterm.gui.gui_windows()[1]:toast_notification(
+				"WezTerm",
+				"Workspace saved successfully",
+				nil,
+				4000
+			)
 		end),
 	},
 	{
