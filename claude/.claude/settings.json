@@ -4,14 +4,8 @@
   "permissions": {
     "allow": [
       "*",
-      "bash(*)",
-      "find",
-      "find(*)",
       "Bash",
-      "Bash(*)",
       "mcp__task-master-ai__*",
-      "task-master(*)",
-      "task-master *",
       "mcp__browsermcp__*",
       "mcp__browsermcp__browser_navigate",
       "mcp__browsermcp__browser_go_back",
@@ -76,7 +70,7 @@
   "model": "opus",
   "statusLine": {
     "type": "command",
-    "command": "claude-powerline",
+    "command": "npx -y @owloops/claude-powerline@latest --theme=tokyo-night --style=powerline",
     "padding": 0
   },
   "feedbackSurveyState": {
