@@ -40,17 +40,20 @@ config.keys = {
 		-- saving workspace and window state separately
 		key = "S",
 		mods = "LEADER|SHIFT",
-		action = wezterm.action_callback(function(win, pane)
-			resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
-			resurrect.window_state.save_window_action()
-			-- Show notification that workspace was saved
-			wezterm.gui.gui_windows()[1]:toast_notification(
-				"WezTerm",
-				"Workspace saved successfully",
-				nil,
-				4000
-			)
-		end),
+		action = wezterm.action.Multiple({
+			wezterm.action_callback(function(win, pane)
+				resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+			end),
+			resurrect.window_state.save_window_action(),
+			wezterm.action_callback(function(win, pane)
+				-- Use wezterm.log_info to show a notification that works on macOS
+				wezterm.log_info("Workspace saved successfully")
+				-- Also try the toast notification
+				if win and win.toast_notification then
+					win:toast_notification("WezTerm", "Workspace saved successfully", nil, 4000)
+				end
+			end),
+		}),
 	},
 	{
 		-- Load workspace or window state, using a fuzzy finder
