@@ -22,7 +22,9 @@
       "Read(//opt/homebrew/share/sketchybar/examples/**)",
       "WebFetch(domain:felixkratz.github.io)",
       "WebFetch(domain:wezfurlong.org)",
-      "Read(/Users/Travis/**)"
+      "Read(/Users/Travis/**)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)"
     ],
     "deny": []
   }

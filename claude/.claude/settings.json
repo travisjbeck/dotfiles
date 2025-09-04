@@ -3,7 +3,6 @@
   "env": {},
   "permissions": {
     "allow": [
-      "*",
       "Bash",
       "mcp__task-master-ai__*",
       "mcp__browsermcp__*",

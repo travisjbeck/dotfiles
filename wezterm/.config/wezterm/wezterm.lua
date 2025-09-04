@@ -43,6 +43,9 @@ local config = {
 		top = 5,
 		bottom = 0,
 	},
+
+	-- Workaround for freezing issues with long-running processes
+	front_end = "OpenGL",
 	-- config.line_height = 1.0
 
 	--allow cmd keys to get through to nvim
