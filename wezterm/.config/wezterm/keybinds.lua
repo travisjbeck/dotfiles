@@ -2,6 +2,12 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 
 local keys = {
+	-- Claude Code support - Shift+Enter sends escape sequence
+	{
+		key = "Enter",
+		mods = "SHIFT",
+		action = act.SendString("\x1b\r"),
+	},
 	-- Split pane creation
 	{
 		key = "|",
