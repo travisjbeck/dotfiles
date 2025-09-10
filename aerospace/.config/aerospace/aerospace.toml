@@ -127,6 +127,8 @@ alt-5 = 'workspace 5'
 alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
 
 alt-f = 'layout floating'
 alt-t = 'layout tiling'
@@ -151,6 +153,8 @@ alt-shift-5 = 'move-node-to-workspace 5'
 alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -248,6 +252,10 @@ run = ['move-node-to-workspace 7']
 [[on-window-detected]]
 if.app-id = 'com.bambulab.bambu-studio'
 run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-id = 'com.conductor.app'
+run = ['move-node-to-workspace 6']
 
 [[on-window-detected]]
 if.app-id = 'com.superduper.superwhisper'
