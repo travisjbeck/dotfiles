@@ -66,12 +66,12 @@
     ],
     "deny": []
   },
-  "model": "opusplan",
   "statusLine": {
     "type": "command",
     "command": "npx -y @owloops/claude-powerline@latest --theme=tokyo-night --style=powerline",
     "padding": 0
   },
+  "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754159652773
   }

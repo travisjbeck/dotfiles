@@ -281,3 +281,7 @@ run = ['move-node-to-workspace 7']
 [[on-window-detected]]
 if.app-id = 'org.chromium.Chromium'
 run = ['move-node-to-workspace 7']
+
+[[on-window-detected]]
+if.app-id = 'com.adobe.PremierePro.25'
+run = ['move-node-to-workspace 9']
