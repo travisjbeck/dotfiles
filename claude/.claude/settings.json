@@ -68,11 +68,13 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "npx -y @owloops/claude-powerline@latest --theme=tokyo-night --style=powerline",
-    "padding": 0
+    "command": "input=$(cat); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); cd \"$cwd\" 2>/dev/null || cd ~; dir_path=$(pwd | sed \"s|^$HOME|~|\"); git_info=\"\"; if git rev-parse --git-dir > /dev/null 2>&1; then branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); git_status=\"\"; if ! git --no-optional-locks diff --quiet 2>/dev/null; then git_status=\"${git_status}±\"; fi; if ! git --no-optional-locks diff --cached --quiet 2>/dev/null; then git_status=\"${git_status}✓\"; fi; if [ -n \"$(git --no-optional-locks ls-files --others --exclude-standard 2>/dev/null)\" ]; then git_status=\"${git_status}?\"; fi; if [ -n \"$git_status\" ]; then git_info=\" ⎇ ${branch} ${git_status}\"; else git_info=\" ⎇ ${branch}\"; fi; fi; printf \"%s%s\" \"$dir_path\" \"$git_info\""
   },
   "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754159652773
+  },
+  "enabledPlugins": {
+    "compound-engineering@every-marketplace": true
   }
 }

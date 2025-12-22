@@ -17,8 +17,8 @@ ZSH_THEME="agnoster"
 plugins=(
   git
   zsh-syntax-highlighting
-  zsh-autocomplete
-  # zsh-autosuggestions
+  zsh-autosuggestions
+  # zsh-autocomplete  # Disabled - can cause runaway CPU issues
   # fast-syntax-highlighting
 )
 
@@ -39,8 +39,8 @@ else
   export EDITOR='nvim'
 fi
 
-# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
-# ZSH_AUTOSUGGEST_STRATEGY=(history)
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # Make Tab and ShiftTab cycle completions on the command line
 # bindkey              '^I'         menu-complete
@@ -124,5 +124,4 @@ export PATH="$PATH:/Users/Travis/.local/bin"
 alias tm='task-master'
 alias taskmaster='task-master'
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.nvm/versions/node/v22.17.1/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+

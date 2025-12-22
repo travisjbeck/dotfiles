@@ -12,3 +12,4 @@
 #age key
 **/.age
 /.claude.json
+.gemini-clipboard

@@ -72,3 +72,9 @@ end, { desc = "Copy fileName to clipboard" })
 -- Claude Code Terminal toggle
 vim.keymap.set('n', '<leader>cc', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
 
+-- Colemak-friendly window navigation (Option + mnei)
+vim.keymap.set('n', '<M-m>', '<C-w>h', { desc = 'Move to left window' })
+vim.keymap.set('n', '<M-n>', '<C-w>j', { desc = 'Move to down window' })
+vim.keymap.set('n', '<M-e>', '<C-w>k', { desc = 'Move to up window' })
+vim.keymap.set('n', '<M-i>', '<C-w>l', { desc = 'Move to right window' })
+
