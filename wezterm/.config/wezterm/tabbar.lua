@@ -2,6 +2,15 @@ local wezterm = require("wezterm")
 local schemeName = "Tokyo Night"
 local scheme = wezterm.get_builtin_color_schemes()[schemeName]
 
+-- Pre-calculate status bar colors (cached at load time for performance)
+local STATUS_BASE = wezterm.color.parse(scheme.brights[1]):lighten(0.2)
+local STATUS_COLORS = {
+	STATUS_BASE:darken(0.6),
+	STATUS_BASE:darken(0.4),
+	STATUS_BASE:darken(0.2),
+	STATUS_BASE,
+}
+
 -- Define the separator characters
 local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
@@ -111,15 +120,6 @@ wezterm.on("update-right-status", function(window, pane)
 	local time = wezterm.strftime("%-I:%M %p")
 	table.insert(cells, time)
 
-	local base = wezterm.color.parse(scheme.brights[1])
-	base = base:lighten(0.2)
-	local colors = {
-		base:darken(0.6), -- darkest (30% darker)
-		base:darken(0.4), -- 20% darker
-		base:darken(0.2), -- 10% darker
-		base, -- original color
-	}
-
 	-- Foreground color for the text across the fade
 	local text_fg = scheme.foreground
 
@@ -134,15 +134,15 @@ wezterm.on("update-right-status", function(window, pane)
 
 		if cell_no == 1 then
 			table.insert(elements, { Background = { Color = scheme.background } })
-			table.insert(elements, { Foreground = { Color = colors[1] } })
+			table.insert(elements, { Foreground = { Color = STATUS_COLORS[1] } })
 			table.insert(elements, { Text = SOLID_LEFT_ARROW })
 		end
 
 		table.insert(elements, { Foreground = { Color = text_fg } })
-		table.insert(elements, { Background = { Color = colors[cell_no] } })
+		table.insert(elements, { Background = { Color = STATUS_COLORS[cell_no] } })
 		table.insert(elements, { Text = " " .. text .. " " })
 		if not is_last then
-			table.insert(elements, { Foreground = { Color = colors[cell_no + 1] } })
+			table.insert(elements, { Foreground = { Color = STATUS_COLORS[cell_no + 1] } })
 			table.insert(elements, { Text = SOLID_LEFT_ARROW })
 		end
 		num_cells = num_cells + 1

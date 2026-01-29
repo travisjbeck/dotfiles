@@ -22,6 +22,13 @@ local config = {
 	scrollback_lines = 3000,
 	default_workspace = "Travis",
 
+	-- Performance optimizations
+	max_fps = 60,
+	front_end = "WebGpu",
+	mux_output_parser_coalesce_delay_ms = 10,
+	animation_fps = 1,
+	text_blink_rate = 0,
+
 	-- dim inactive pane
 	inactive_pane_hsb = {
 		saturation = 0.7,
@@ -32,10 +39,10 @@ local config = {
 	window_decorations = "RESIZE",
 	color_scheme = schemeName,
 
-	status_update_interval = 1000,
+	status_update_interval = 5000,
 
 	window_background_opacity = 1,
-	macos_window_background_blur = 10,
+	macos_window_background_blur = 0,
 
 	window_padding = {
 		left = 5,

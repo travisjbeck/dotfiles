@@ -18,7 +18,7 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  # zsh-autocomplete  # Disabled - can cause runaway CPU issues
+  # zsh-autocomplete  # Disabled - causes issues
   # fast-syntax-highlighting
 )
 
@@ -107,8 +107,9 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="$PATH:/Users/Travis/.lmstudio/bin"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/Travis/.docker/completions $fpath)
-autoload -Uz compini
+autoload -Uz compinit
 compinit
+zstyle ':completion:*' menu select
 # End of Docker CLI completions
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
