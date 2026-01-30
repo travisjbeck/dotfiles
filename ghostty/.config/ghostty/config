@@ -24,3 +24,30 @@ palette = 12=#7aa2f7
 palette = 13=#bb9af7
 palette = 14=#7dcfff
 palette = 15=#c0caf6
+
+# Wezterm-style keybindings (CTRL+B leader)
+
+# Splits
+keybind = ctrl+b>shift+backslash=new_split:right
+keybind = ctrl+b>minus=new_split:down
+
+# Navigation (Colemak-DH: m=left, n=down, e=up, i=right)
+keybind = ctrl+b>m=goto_split:left
+keybind = ctrl+b>n=goto_split:down
+keybind = ctrl+b>e=goto_split:up
+keybind = ctrl+b>i=goto_split:right
+
+# Resize splits
+keybind = ctrl+b>shift+m=resize_split:left,20
+keybind = ctrl+b>shift+n=resize_split:down,20
+keybind = ctrl+b>shift+e=resize_split:up,20
+keybind = ctrl+b>shift+i=resize_split:right,20
+
+# Pane management
+keybind = ctrl+b>z=toggle_split_zoom
+keybind = ctrl+b>c=close_surface
+# Note: swap_split is not available in Ghostty
+keybind = ctrl+b>equal=equalize_splits
+
+# Window state persistence (basic - not full session restore)
+window-save-state = always

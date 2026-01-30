@@ -203,7 +203,7 @@ run = ['move-node-to-workspace 8']
 
 [[on-window-detected]]
 if.app-id = "com.mitchellh.ghostty"
-run = ["layout floating", "layout tiling", "move-node-to-workspace 1"]
+run = ["layout tiling", "move-node-to-workspace 9"]
 
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'

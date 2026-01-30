@@ -126,3 +126,6 @@ alias tm='task-master'
 alias taskmaster='task-master'
 export PATH="$HOME/.local/bin:$PATH"
 
+# Claude Code alias
+alias cldsp='claude --dangerously-skip-permissions'
+
