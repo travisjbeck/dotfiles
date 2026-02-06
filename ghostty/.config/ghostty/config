@@ -1,5 +1,10 @@
 
+auto-update-channel = tip
+font-family = MesloLGS Nerd Font Mono
 font-size = 16
+macos-titlebar-style = tabs
+fullscreen = true
+macos-non-native-fullscreen = true
 
 # tokyo night theme
 background = #24283b
@@ -46,6 +51,7 @@ keybind = ctrl+b>shift+i=resize_split:right,20
 # Pane management
 keybind = ctrl+b>z=toggle_split_zoom
 keybind = ctrl+b>c=close_surface
+keybind = ctrl+b>t=prompt_tab_title
 # Note: swap_split is not available in Ghostty
 keybind = ctrl+b>equal=equalize_splits
 

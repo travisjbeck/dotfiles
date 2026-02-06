@@ -118,9 +118,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
 
 
-# Created by `pipx` on 2025-06-24 02:39:42
-export PATH="$PATH:/Users/Travis/.local/bin"
-
 # Task Master aliases added on 6/30/2025
 alias tm='task-master'
 alias taskmaster='task-master'
@@ -129,3 +126,4 @@ export PATH="$HOME/.local/bin:$PATH"
 # Claude Code alias
 alias cldsp='claude --dangerously-skip-permissions'
 
+export AWS_PROFILE=pickleball
