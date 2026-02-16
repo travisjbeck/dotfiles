@@ -5,11 +5,34 @@ description: Review uncommitted changes using parallel agents to find security i
 
 # Review Uncommitted Changes
 
-Review all uncommitted changes (staged + unstaged) against HEAD using parallel review agents, then synthesize findings into a deduplicated, prioritized issue list.
+## OUTPUT FORMAT (MANDATORY)
 
-## Step 1: Get Current Changes
+Your ENTIRE response to the user after all agents complete MUST be a single markdown table and NOTHING ELSE. No greeting, no summary sentence, no explanation, no agent reports, no details blocks, no sign-off. The table is the only thing the user sees.
 
-First, understand what has changed by running these commands:
+If no issues are found, respond with ONLY: "No issues found."
+
+Otherwise respond with ONLY this table (sorted P1 → P3):
+
+| Priority | Category | Issue | Location |
+|----------|----------|-------|----------|
+| P1 | Security | Brief description | `file.ts:45` |
+| P2 | Performance | Brief description | `api.ts:112` |
+| P3 | Code Quality | Brief description | `utils.ts:67` |
+
+Priority definitions:
+- **P1**: Security vulnerabilities, data corruption, breaking changes, crashes
+- **P2**: Performance issues, architectural violations, significant code quality problems
+- **P3**: Minor improvements, code cleanup, style suggestions
+
+DO NOT output anything other than the table.
+
+---
+
+## Execution Steps
+
+### Step 1: Get Changes
+
+Run these commands:
 
 ```bash
 git diff HEAD --stat
@@ -23,33 +46,29 @@ git diff HEAD --name-only
 git diff HEAD
 ```
 
-If there are no changes, inform the user and stop.
+If there are no changes, respond with ONLY: "No uncommitted changes found." and stop.
 
-## Step 2: Determine Which Agents to Run
+### Step 2: Determine Agents
 
-**Always run these 5 agents:**
-1. `compound-engineering:review:security-sentinel` - Security vulnerabilities
-2. `compound-engineering:review:performance-oracle` - Performance issues
-3. `compound-engineering:review:architecture-strategist` - Architectural concerns
-4. `compound-engineering:review:pattern-recognition-specialist` - Anti-patterns, code smells
-5. `compound-engineering:review:code-simplicity-reviewer` - Over-engineering
+**Always run these 5:**
+1. `compound-engineering:review:security-sentinel`
+2. `compound-engineering:review:performance-oracle`
+3. `compound-engineering:review:architecture-strategist`
+4. `compound-engineering:review:pattern-recognition-specialist`
+5. `compound-engineering:review:code-simplicity-reviewer`
 
-**Run these conditionally based on file extensions in the diff:**
-- If `.ts` or `.tsx` files changed: `compound-engineering:review:kieran-typescript-reviewer`
-- If `.rb` files changed: `compound-engineering:review:kieran-rails-reviewer`
-- If `.py` files changed: `compound-engineering:review:kieran-python-reviewer`
-- If `.js` files or Stimulus controllers changed: `compound-engineering:review:julik-frontend-races-reviewer`
+**Conditionally:**
+- `.ts`/`.tsx` files → also run `compound-engineering:review:kieran-typescript-reviewer`
+- `.rb` files → also run `compound-engineering:review:kieran-rails-reviewer`
+- `.py` files → also run `compound-engineering:review:kieran-python-reviewer`
+- `.js`/Stimulus files → also run `compound-engineering:review:julik-frontend-races-reviewer`
 
-## Step 3: Launch Parallel Review Agents
+### Step 3: Launch All Agents in Parallel
 
 Use the Task tool to launch ALL applicable agents IN PARALLEL (single message, multiple Task tool calls).
 
-For each agent, provide this context:
-1. The full git diff output
-2. The list of changed files
-3. Clear instruction: "Analyze ONLY the changed code in this diff. Report findings with file:line references."
+Each agent prompt MUST be:
 
-Example agent prompt:
 ```
 Review the following uncommitted changes for [agent focus area].
 
@@ -61,68 +80,16 @@ Full diff:
 
 Instructions:
 - Focus ONLY on the changed lines (+ lines in diff)
-- Report each finding with: severity, category, description, file:line reference
-- Be specific and actionable
+- For each finding, return ONLY a line in this format:
+  SEVERITY | CATEGORY | DESCRIPTION | FILE:LINE
+  Example: P1 | Security | SQL injection via unsanitized input | src/api.ts:45
 - Do not report issues in unchanged code
+- If no issues found, return: NO_ISSUES
 ```
 
-## Step 4: Synthesize Findings
+### Step 4: Synthesize into Table
 
-After ALL agents complete, synthesize their findings:
-
-1. **Collect** all findings from each agent
-2. **Deduplicate** - Remove identical or overlapping findings (same issue reported by multiple agents)
-3. **Categorize** by severity:
-   - **P1 (CRITICAL)**: Security vulnerabilities, data corruption risks, breaking changes, crashes
-   - **P2 (IMPORTANT)**: Performance issues, architectural violations, significant code quality problems
-   - **P3 (NICE-TO-HAVE)**: Minor improvements, code cleanup, style suggestions
-
-## Step 5: Present Final Output
-
-Format the output as follows:
-
-```markdown
-## Review Complete: Uncommitted Changes
-
-**Files Changed:** [count]
-**Total Findings:** [count] ([P1 count] critical, [P2 count] important, [P3 count] suggestions)
-
-### P1 - Critical (Must Fix Before Commit)
-- [ ] [Category] Description `file.ts:45`
-- [ ] [Category] Description `model.rb:23`
-
-### P2 - Important (Should Fix)
-- [ ] [Category] Description `api.ts:112`
-- [ ] [Category] Description `hook.ts:78`
-
-### P3 - Nice to Have
-- [ ] [Category] Description `utils.ts:67`
-
----
-
-<details>
-<summary>Full Report: security-sentinel</summary>
-
-[Agent's full findings]
-
-</details>
-
-<details>
-<summary>Full Report: performance-oracle</summary>
-
-[Agent's full findings]
-
-</details>
-
-[... additional agent reports ...]
-```
-
-If no findings: "No issues found in uncommitted changes."
-
-## Important Notes
-
-- Run agents in PARALLEL for speed (use multiple Task tool calls in a single message)
-- Only analyze CHANGED code, not the entire file
-- Deduplicate aggressively - same issue from multiple agents counts as ONE finding
-- Include file:line references for every finding
-- P1 findings should block commit - make this clear to the user
+1. Collect all agent findings
+2. Deduplicate (same issue from multiple agents = one row)
+3. Sort P1 → P3
+4. Output ONLY the markdown table described in the OUTPUT FORMAT section above
